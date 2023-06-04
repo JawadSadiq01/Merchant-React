@@ -34,19 +34,38 @@ function Home() {
   const [search, setSearch] = useState([]);
   const [reRender, setReRender] = useState(false);
   useEffect(() => {
-    // getAllEvents();
+    getAllMerchants();
   }, [reRender]);
 
-  const getAllEvents = () => {
+  const getAllMerchants = () => {
+    let url = 'https://9ca8-39-62-29-247.ngrok-free.app/admins';
+    // let url = GLOBALS.BASE_URL + 'api/v1/networks';
+    console.log('admin/index', url);
     axios
-      .get("http://127.0.0.1:5000/api/event-list", {})
-      .then((response) => {
-        setAllEvents(response.data.events);
+      .get(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('user_token'),
+        },
       })
-      .catch((error) => {
-        // console.error("dddddddddddd", error.response.data.message);
+      .then(async function (response) {
+        console.log('Successfully get all Bookings', response);
+      })
+      .catch(function (error) {
+        console.log('Api Error', error);
       });
+
+    // axios
+    //   .get("http://127.0.0.1:5000/api/event-list", {})
+    //   .then((response) => {
+    //     setAllEvents(response.data.events);
+    //   })
+    //   .catch((error) => {
+    //     // console.error("dddddddddddd", error.response.data.message);
+    //   });
   };
+
   return (
     <>
       <div>

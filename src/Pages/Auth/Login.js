@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import GLOBALS from '../../../config';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("user_token") != null) navigate("/admin-dashboard");
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // let url = GLOBALS.BASE_URL + 'login';
-    let url = 'https://8ef2-39-62-29-247.ngrok-free.app/admin/login';
+    let url = 'https://9ca8-39-62-29-247.ngrok-free.app/admin/login';
     console.log(url);
     const config = {
       headers: {
@@ -21,21 +23,26 @@ function Login() {
       },
     };
     const postData = {
-      email: "admin1@gmail.com",
-      password: "123123"
+      email: email,
+      password: password,
     };
     axios
       .post(url, postData, config)
       .then((response) => {
-        // localStorage.setItem("user_id", response.data.user._id);
-        // localStorage.setItem("user_email", response.data.user.email);
-        // localStorage.setItem("user_name", response.data.user.name);
-        console.log(response);
-        navigate("/admin-dashboard");
+        if (response.data.error == true) {
+          setErrorMsg(response.data.msg + '!');
+        } else {
+          console.log(response);
+          setErrorMsg("");
+          localStorage.setItem("user_token", response.data.token);
+          localStorage.setItem("user_email", response.data.email);
+          localStorage.setItem("user_name", response.data.name);
+          navigate("/admin-dashboard");
+        }
       })
       .catch((error) => {
-        console.log(error);
-        // setErrorMsg(error.response.data.message);
+        console.log("axios error: ", error);
+        setErrorMsg("Network Error!");
       });
   };
 

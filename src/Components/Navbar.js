@@ -36,6 +36,9 @@ function Navbar({ user, reRender, setReRender, search, setSearch }) {
     setSearch(event.target.search.value);
   };
   const logout = (event) => {
+    localStorage.removeItem("user_token");
+    localStorage.removeItem("user_email");
+    localStorage.removeItem("user_name");
     navigate('/login');
   };
 
