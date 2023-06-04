@@ -12,14 +12,12 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // let url = GLOBALS.BASE_URL + 'login';
-    let url = 'https://6b10-39-62-29-247.ngrok-free.app/' + 'admin/login';
+    let url = 'https://8ef2-39-62-29-247.ngrok-free.app/admin/login';
     console.log(url);
     const config = {
       headers: {
-        'Access-Control-Allow-Origin': '*', // Replace '*' with your desired origin or remove this line for specific origins
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Headers': 'Content-Type',
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     };
     const postData = {
