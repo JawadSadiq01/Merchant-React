@@ -128,8 +128,8 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
-  font: inherit;
+  /* font-size: 100%; */
+  /* font: inherit; */
   vertical-align: baseline;
 }
 
@@ -252,6 +252,25 @@ body {
   background-size: cover;
   background-attachment: fixed;
   font-family: 'Roboto', sans-serif;
+}
+
+.project-info-box {
+  margin: 15px 0;
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 5px;
+}
+
+.project-info-box p {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #d5dadb;
+}
+
+.project-info-box p:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 h1 {
@@ -384,7 +403,7 @@ input[type="submit"]:hover {
 }
 
 input.checkbox {
-  background: #8DC26F;
+  background: #a8b8da;
   cursor: pointer;
   width: 1.2em;
   height: 1.2em;
@@ -426,11 +445,13 @@ input.checkbox:checked:after {
   border-right-color: transparent;
 }
 
-.footer {
-  padding: 10px;
+.page-footer {
   text-align: center;
-  /* Sticky footer styles */
-  position: sticky;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  position: fixed;
   bottom: 0;
 }
 
@@ -566,6 +587,57 @@ input.checkbox:checked:after {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
+.panel-order .row {
+  border-bottom: 1px solid #ccc;
+}
+
+.panel-order .row:last-child {
+  border: 0px;
+}
+
+.panel-order .row .col-md-1 {
+  text-align: center;
+  padding-top: 15px;
+}
+
+.panel-order .row .col-md-1 img {
+  width: 50px;
+  max-height: 50px;
+}
+
+.panel-order .row .row {
+  border-bottom: 0;
+}
+
+.panel-order .row .col-md-11 {
+  border-left: 1px solid #ccc;
+}
+
+.panel-order .row .row .col-md-12 {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.panel-order .row .row .col-md-12:last-child {
+  font-size: 11px;
+  color: #555;
+  background: #efefef;
+}
+
+.panel-order .btn-group {
+  margin: 0px;
+  padding: 0px;
+}
+
+.panel-order .panel-body {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.panel-order .panel-deading {
+  margin-bottom: 0;
+}
+
 .colorlib-bubbles li:nth-child(5) {
   left: 70%;
 }
@@ -603,6 +675,11 @@ input.checkbox:checked:after {
   -webkit-animation-duration: 40s;
   -moz-animation-duration: 40s;
   animation-duration: 40s;
+}
+
+.details-main {
+  background-color: #E3F2F5;
+  min-height: 100vh;
 }
 
 .colorlib-bubbles li:nth-child(9) {

@@ -3,8 +3,8 @@ import React from 'react'
 function footer() {
 	return (
 		<>
-			<div class="colorlibcopy-agile footer">
-				<p>© 2023 All rights reserved | Design & Developed by Haider</p>
+			<div class="colorlibcopy-agile page-footer">
+				<p class="text-black">© 2023 All rights reserved</p>
 			</div>
 		</>
 	)
