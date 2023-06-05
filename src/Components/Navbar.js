@@ -2,8 +2,10 @@ import { Box } from "@mui/system";
 import React from "react";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import EventForm from "./EventForm";
+import EventForm from "./Forms/TransactionForm";
 import { useNavigate } from 'react-router-dom';
+import MerchantForm from "./Forms/MerchantForm";
+import TransactionForm from "./Forms/TransactionForm";
 
 const style = {
   position: "absolute",
@@ -12,9 +14,9 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  height: "95%",
+  // height: "95%",
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  // border: "2px solid #000",
   boxShadow: 24,
   zIndex: 1000,
   pt: 2,
@@ -35,26 +37,26 @@ function Navbar({ user, reRender, setReRender, search, setSearch }) {
     event.preventDefault();
     setSearch(event.target.search.value);
   };
-  const logout = (event) => {
+  const logout = () => {
     localStorage.removeItem("user_token");
     localStorage.removeItem("user_email");
     localStorage.removeItem("user_name");
+    localStorage.removeItem("user_type");
+    localStorage.removeItem("merchant_id");
     navigate('/login');
   };
 
   return (
     <>
-      {/* <nav class="navbar navbar-expand-lg bg-light"> */}
       <Box sx={{ position: "fixed", zIndex: 1000, mt: -10, width: "100%" }}>
-        {/* <nav class="navbar navbar-dark navbar-expand-lg bg-light"> */}
-        <nav class="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: '#e3f2fd' }}>
+        <nav class="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: '#76b852' }}>
 
           <div class="container-fluid">
-            <b><a style={{ color: "#2293B0" }} class="navbar-brand" href="#">
-              Merchant App:
+            <b><a style={{ color: "#112c32" }} class="navbar-brand" href="#">
+              Merchant App   |
             </a></b>
             <div>
-              <Button variant="text" color="info" onClick={handleOpen}>{user == "merchant" ? 'Create Transaction' : 'Add Merchant'} </Button>
+              <Button variant="text" sx={{ fontSize: 15, color: 'blue' }} onClick={handleOpen}>{user == "merchant" ? 'Create Transaction' : 'Add Merchant'} </Button>
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -62,9 +64,13 @@ function Navbar({ user, reRender, setReRender, search, setSearch }) {
                 aria-describedby="parent-modal-description"
               >
                 <Box
-                  sx={{ ...style, width: 500, mt: 10, background: "#1c2651" }}
+                  sx={{ ...style, width: 500, mt: 10, background: "#a8b8da", }}
                 >
-                  <EventForm setReRender={setReRender} reRender={reRender} setOpen={setOpen} />
+                  {user == 'merchant' ?
+                    <TransactionForm user={user} setReRender={setReRender} reRender={reRender} setOpen={setOpen} />
+                    :
+                    <MerchantForm user={user} setReRender={setReRender} reRender={reRender} setOpen={setOpen} />
+                  }
                 </Box>
               </Modal>
             </div>
@@ -140,9 +146,9 @@ function Navbar({ user, reRender, setReRender, search, setSearch }) {
                   Search
                 </button> */}
               </form>
-              <button onClick={logout} style={{ marginLeft: 10 }} class="btn btn-outline-danger">
+              <Button onClick={logout} style={{ marginLeft: 10 }} class="btn btn-outline-secondary">
                 Logout
-              </button>
+              </Button>
             </div>
           </div>
         </nav>

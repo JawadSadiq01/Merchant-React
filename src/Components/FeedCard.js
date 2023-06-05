@@ -19,7 +19,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { Modal, Box } from "@mui/material";
-import EventForm from './EventForm';
+import EventForm from './Forms/TransactionForm';
 
 const style = {
   position: "absolute",

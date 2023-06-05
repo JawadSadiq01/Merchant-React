@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import GLOBALS from '../../config';
+import { Alert } from '@mui/material';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -13,8 +15,7 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // let url = GLOBALS.BASE_URL + 'login';
-    let url = 'https://9ca8-39-62-29-247.ngrok-free.app/admin/login';
+    let url = GLOBALS.BASE_URL + 'admin/login';
     console.log(url);
     const config = {
       headers: {
@@ -37,6 +38,7 @@ function Login() {
           localStorage.setItem("user_token", response.data.token);
           localStorage.setItem("user_email", response.data.email);
           localStorage.setItem("user_name", response.data.name);
+          localStorage.setItem("user_type", 'admin');
           navigate("/admin-dashboard");
         }
       })
@@ -56,8 +58,8 @@ function Login() {
         <h1>Login</h1>
         <div class="main-agileinfo">
           <div class="agileits-top">
+            {errorMsg != "" && <Alert severity="error">{errorMsg}</Alert>}
             <form onSubmit={handleSubmit}>
-              <div style={{ color: "red" }}>{errorMsg}</div>
               <input
                 className="text"
                 style={style}

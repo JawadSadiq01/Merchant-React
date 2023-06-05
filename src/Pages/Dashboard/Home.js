@@ -6,31 +6,10 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Navbar from "../../Components/Navbar";
 import axios from "axios";
-import MerchantTable from "../../Components/MerchantTable";
+import MerchantTable from "../../Components/Tables/MerchantTable";
+import GLOBALS from '../../config';
 function Home() {
-  const [allEvents, setAllEvents] = useState([
-    {
-      "_id": "647b0d073d3925758787fb6f",
-      "title": "Voluptates provident",
-      "description": "Fuga Ex qui duis la",
-      "date": "2023-06-03",
-      "venue": "Aut autem perspiciat",
-      "type": "Meeting",
-      "owner": {
-        "events_favorite": [],
-        "_id": "647afca406eb5de2d83c246d",
-        "name": "asdfd",
-        "email": "jelykaw@mailinator.com",
-        "password": "123456",
-        "events_joined": [],
-        "__v": 0
-      },
-      "participants": [],
-      "date_created": "2023-06-03T09:51:03.337Z",
-      "__v": 0
-    }
-  ]);
-
+  const [allMerchants, setAllMerchants] = useState([]);
   const [search, setSearch] = useState([]);
   const [reRender, setReRender] = useState(false);
   useEffect(() => {
@@ -38,32 +17,21 @@ function Home() {
   }, [reRender]);
 
   const getAllMerchants = () => {
-    let url = 'https://9ca8-39-62-29-247.ngrok-free.app/admins';
-    // let url = GLOBALS.BASE_URL + 'api/v1/networks';
-    console.log('admin/index', url);
-    axios
-      .get(url, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('user_token'),
-        },
+    let url = GLOBALS.BASE_URL + 'merchants';
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('user_token'),
+      },
+    };
+    axios.get(url, config)
+      .then((response) => {
+        setAllMerchants(response.data.merchants);
       })
-      .then(async function (response) {
-        console.log('Successfully get all Bookings', response);
-      })
-      .catch(function (error) {
+      .catch((error) => {
         console.log('Api Error', error);
       });
-
-    // axios
-    //   .get("http://127.0.0.1:5000/api/event-list", {})
-    //   .then((response) => {
-    //     setAllEvents(response.data.events);
-    //   })
-    //   .catch((error) => {
-    //     // console.error("dddddddddddd", error.response.data.message);
-    //   });
   };
 
   return (
@@ -76,17 +44,7 @@ function Home() {
           <Grid container spacing={2}>
             <Grid item xs={0.1}></Grid>
             <Grid item xs={11.7}>
-              <MerchantTable />
-              {/* {
-                (search == ""
-                  ? allEvents?.map((item) => {
-                    return <FeedCard event={item} reRender={reRender} setReRender={setReRender} search={search} setSearch={setSearch} />;
-                  })
-                  : allEvents?.map((item) => {
-                    if (item.title.toLowerCase().includes(search.toLowerCase())) return <FeedCard reRender={reRender} setReRender={setReRender} search={search} setSearch={setSearch} event={item} />;
-                    else if (item.description.toLowerCase().includes(search.toLowerCase())) return <FeedCard reRender={reRender} setReRender={setReRender} search={search} setSearch={setSearch} event={item} />;
-                  }))
-              } */}
+              <MerchantTable reRender={reRender} setReRender={setReRender} setAllMerchants={setAllMerchants} allMerchants={allMerchants} />
             </Grid>
             <Grid item xs={0.1}></Grid>
           </Grid>
