@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import GLOBALS from '../../config';
@@ -12,11 +12,15 @@ function Signup() {
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [password, setPassword] = useState('')
+  const [terms, setTerms] = useState(true)
   const [confirmPassword, setConfirmPassword] = useState({
     value: "",
     isTouched: false
   });
-  const [terms, setTerms] = useState(true)
+
+  useEffect(() => {
+    if (localStorage.getItem("user_token") != null) navigate("/admin-dashboard");
+  }, []);
 
   const errorStyle = {
     color: 'red',
@@ -48,7 +52,6 @@ function Signup() {
         password: password,
       }
     };
-    console.log(postData);
     axios
       .post(url, postData, config)
       .then((response) => {
@@ -137,22 +140,6 @@ function Signup() {
                 confirmPassword.isTouched ? (
                 <PasswordErrorMessage />
               ) : null}
-
-              {/* <div style={{ marginBottom: '20px' }} className="wthree-text">
-                <div class="form-check">
-                  <label class="form-check-label" for="exampleRadios1">
-                    Signed Up As an Admin
-                  </label>
-                  <input required class="form-check-input" type="radio" name="userType" id="exampleRadios1" value="admin" />
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label" for="exampleRadios2">
-                    Signed Up As a Merchant
-                  </label>
-                  <input required class="form-check-input" type="radio" name="userType" id="exampleRadios2" value="merchant" />
-                </div>
-                <div className="clear"> </div>
-              </div> */}
 
               <div className="wthree-text">
                 <label className="anim">

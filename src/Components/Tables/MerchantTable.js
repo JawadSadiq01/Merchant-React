@@ -146,8 +146,8 @@ export default function MerchantTable({ setAllMerchants, reRender, setReRender, 
                       </TableCell>
 
                       <TableCell align={'right'}>
-                        <Button onClick={() => deleteMerchant(row)}> <DeleteIcon color="primary" /></Button>
-                        <Button onClick={() => editMerchant(row)}> <EditIcon color="primary" /></Button>
+                        <Button onClick={() => deleteMerchant(row)}> <DeleteIcon color="error" /></Button>
+                        <Button onClick={() => editMerchant(row)}> <EditIcon color="success" /></Button>
                         <NavLink to="/merchant-Detail" state={{ merchant: row }} style={{ textDecoration: 'none' }}>
                           <Button ><DescriptionIcon color="primary" /></Button>
                         </NavLink>

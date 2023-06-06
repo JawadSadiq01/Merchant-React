@@ -30,7 +30,6 @@ function MerchantForm({ user, merchant, setOpen, setReRender, reRender }) {
         total_transaction_sum: 0.0,
       }
     };
-    console.log(postData);
     axios
       .post(url, postData, config)
       .then((response) => {
@@ -149,7 +148,6 @@ function MerchantForm({ user, merchant, setOpen, setReRender, reRender }) {
                 type="submit"
                 value={merchant ? "Update An Merchant" : "Create Merchant"
                 }
-              //disabled={type === "" ? true : false}
               />
             </form>
           </div>

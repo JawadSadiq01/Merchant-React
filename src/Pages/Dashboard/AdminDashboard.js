@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import FeedCard from "../../Components/FeedCard";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -8,11 +7,16 @@ import Navbar from "../../Components/Navbar";
 import axios from "axios";
 import MerchantTable from "../../Components/Tables/MerchantTable";
 import GLOBALS from '../../config';
-function Home() {
+import { useNavigate } from "react-router-dom";
+
+function AdminDashboard() {
   const [allMerchants, setAllMerchants] = useState([]);
   const [search, setSearch] = useState([]);
   const [reRender, setReRender] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (localStorage.getItem("user_type") == 'merchant') navigate("/merchant-dashboard");
     getAllMerchants();
   }, [reRender]);
 
@@ -54,4 +58,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default AdminDashboard;
