@@ -9,7 +9,6 @@ export const MerchantDetail = () => {
   var { merchant } = location.state ? location.state : {};
 
   useEffect(() => {
-    if (localStorage.getItem("user_type") == 'merchant') navigate("/merchant-dashboard");
     if (location.state == null) navigate('/admin-dashboard');
   }, []);
   const loginMerchant = () => {

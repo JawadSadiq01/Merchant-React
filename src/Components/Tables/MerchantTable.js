@@ -15,6 +15,7 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import GLOBALS from '../../config';
 import MerchantForm from '../Forms/MerchantForm';
+import { Alert } from '@mui/material';
 
 const style = {
   position: "absolute",
@@ -43,6 +44,8 @@ const columns = [
 export default function MerchantTable({ setAllMerchants, reRender, setReRender, allMerchants }) {
   const [open, setOpen] = React.useState(false);
   const [currentMerchant, setCurrentMerchant] = React.useState();
+  const [errorMsg, setErrorMsg] = React.useState('');
+  const [successMsg, setSuccessMsg] = React.useState('');
 
   const handleOpen = () => {
     setOpen(true);
@@ -75,9 +78,22 @@ export default function MerchantTable({ setAllMerchants, reRender, setReRender, 
     axios.delete(url, config)
       .then((response) => {
         console.log(response);
+        if (response.data.error == true) { setSuccessMsg(""); setErrorMsg(response.data.msg + '!'); }
+        else { setSuccessMsg("Merchant Deleted Successfully!"); }
+
+        setTimeout(() => {
+          setErrorMsg("");
+          setSuccessMsg("");
+        }, 3000);
+
         setReRender(!reRender);
       })
       .catch((error) => {
+        setErrorMsg("Network Error!");
+        setTimeout(() => {
+          setErrorMsg("");
+          setSuccessMsg("");
+        }, 3000);
         console.log('Api Error', error);
       });
   };
@@ -89,6 +105,8 @@ export default function MerchantTable({ setAllMerchants, reRender, setReRender, 
   return (
     <>
       <div>
+        {errorMsg != "" && <Alert style={{ marginBottom: 10 }} severity="error">{errorMsg}</Alert>}
+        {successMsg != "" && <Alert style={{ marginBottom: 10 }} severity="success">{successMsg}</Alert>}
         <Modal
           open={open}
           onClose={handleClose}

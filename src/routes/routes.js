@@ -10,8 +10,8 @@ export const routes = [
   { path: "/sign-up", Component: Signup, isPublic: true },
   { path: "/login", Component: Login, isPublic: true },
   { path: "/", Component: LandingPage, isPublic: true },
-  { path: "/admin-dashboard", Component: AdminDashboard, isPublic: false },
-  { path: "/merchant-Detail", Component: MerchantDetail, isPublic: false },
-  { path: "/merchant-dashboard", Component: MerchantDashboard, isPublic: false },
+  { path: "/admin-dashboard", Component: AdminDashboard, userType: 'admin', isPublic: false },
+  { path: "/merchant-Detail", Component: MerchantDetail, userType: 'admin', isPublic: false },
+  { path: "/merchant-dashboard", Component: MerchantDashboard, userType: 'merchant', isPublic: false },
   { path: "*", Component: ErrorPage, isPublic: true },
 ];

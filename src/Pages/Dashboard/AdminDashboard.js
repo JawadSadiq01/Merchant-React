@@ -16,7 +16,6 @@ function AdminDashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("user_type") == 'merchant') navigate("/merchant-dashboard");
     getAllMerchants();
   }, [reRender]);
 

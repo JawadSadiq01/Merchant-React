@@ -5,12 +5,15 @@ export const RouteComponent = () => {
   return (
     <Router>
       <Routes>
-        {routes.map(({ path, Component, isPublic }, key) => (
+        {routes.map(({ path, Component, isPublic, userType }, key) => (
           <Route
             key={key}
             path={path}
             element={
-              isPublic ? <Component /> : <ProtectedRoute component={Component} />
+              isPublic ?
+                <Component />
+                :
+                <ProtectedRoute userType={userType} component={Component} />
             }
             exact={true}
           />
